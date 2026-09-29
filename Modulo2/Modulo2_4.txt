@@ -1,0 +1,14 @@
+=== Referências ===
+- ODEWELL, Krishna Rungta. Learn NodeJS in 1 Day. Independently published, 2017.
+
+- FREITAS, P. E. C., et al. Programação back end.  Porto Alegre: Sagah, 2021.
+
+- MARDAN, Azat. Practical Node.js: Building Real-World Scalable Web Apps. 2. ed. New York: Apress, 2018.
+
+- NODE.JS. Introdução ao Node.js. Disponível em: https://nodejs.org/pt/learn/getting-started/introduction-to-nodejs. Acesso em: 4 nov. 2024.
+
+- OLIVEIRA, C. L. V. Node.js - Programe de forma rápida e prática. São Paulo: Expressa, 2021.
+
+- PEREIRA, Caio Ribeiro. Building APIs with Node.js. 1. ed. Birmingham: Packt Publishing, 2016.
+
+- SKINNER, David Mark Clements. Node Cookbook. 2. ed. Birmingham: Packt Publishing, 2014.

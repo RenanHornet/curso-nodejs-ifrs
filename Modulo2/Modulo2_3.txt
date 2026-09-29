@@ -271,3 +271,32 @@ Aqui, estamos enviando um novo produto com "nome": "Produto C" e "preco": 40.0. 
 
 Se o produto for criado com sucesso, você deverá receber uma resposta 201 Created com o novo produto, incluindo um ID gerado.
 
+=-=-= Endpoint PUT /api/produtos/{id}=-=-=
+No arquivo testes.rest, insira a seguinte requisição para o endpoint PUT /api/produtos/{id}, substituindo {id} pelo ID do produto que você deseja atualizar. Vamos usar 1 como exemplo. Defina o “Content-Type” como “application/json” e insira o corpo JSON com os dados atualizados do produto.
+
+### Endpoint PUT /api/produtos/{id}
+PUT http://localhost:3000/api/produtos/1
+Content-Type: application/json
+    
+{
+      "nome": "Produto Atualizado",
+      "preco": 60.0
+}    
+
+=-=-= Endpoint DELETE /api/produtos/{id} =-=-=
+No arquivo testes.rest, insira a seguinte requisição para o endpoint DELETE /api/produtos/{id}, substituindo {id} pelo ID do produto que você deseja excluir. Vamos usar 1 como exemplo.
+
+### Endpoint DELETE /api/produtos/{id} DELETE http://localhost:3000/api/produtos/1
+
+Após escrever a requisição, um link “Send Request” aparecerá acima dela. Clique nesse link para enviar a requisição. Se a exclusão for bem-sucedida, você deverá receber uma resposta 200 OK com uma mensagem confirmando que o produto foi deletado.
+
+HTTP/1.1 200 OK
+Content-Type: application/json
+Date: Wed, 06 Nov 2024 08:14:56 GMT
+Connection: close
+Content-Length: 39
+    
+{
+    
+      "message": "Produto com ID 1 deletado"
+}
