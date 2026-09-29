@@ -1,0 +1,58 @@
+=== Comu usar o REPL do Node.js ==-
+O REPL do Node.js (Read-Eval-Print Loop) é um ambiente interativo no terminal que permite executar comandos JavaScript linha a linha (NODE.JS, 2023). É útil para testar pequenos trechos de código, explorar funcionalidades do Node.js e depurar expressões rapidamente. 
+
+=-=-= Como acessar o REPL do Node.js =-=-=
+Para iniciar o REPL, basta abrir um terminal e digitar o comando node:
+
+node
+
+Isso abrirá o ambiente REPL do Node.js. Você verá um prompt (>) que indica que o REPL está pronto para aceitar comandos. 
+
+Agora, você pode digitar comandos JavaScript e pressionar Enter para ver o resultado imediatamente.
+
+=-=-= Comandos básicos no REPL =-=-=
+O REPL permite executar qualquer código JavaScript que seja válido. Veja alguns exemplos de operações básicas:
+
+--- Operações matemáticas ---
+
+> 5 + 3
+8
+>10*2
+20
+
+--- Declarar variáveis e funções ---
+>let x = 10 
+undefined
+>x * 5
+50
+> function soma (a, b) {return a + b; }
+undefined
+soma(3, 7)
+10
+
+--- Trabalhar com Estrutura de controle ---
+> for (let i = 0; i < 3; i++) {console.log(i);}
+0
+1
+2
+
+--- Executando comandos em múltiplas linhas ---
+> function saudacao (nome) {
+    if (!nome) {
+        nome = 'amigo';
+    }
+    return `Olá, ${nome}!`;
+}
+undefined
+saudacao();
+'Olá, amigo!'
+
+--- Salvando Código com .save ---
+> .save minhasFuncoes.js
+Session saved to: minhasFuncoes.js
+
+--- Carregando um Arquivo de Código com .load ---
+> .load minhasFuncoes.js
+
+--- Para sair do REPL ---
+Digite .exit e pressione enter ou pressione control + c duas vezes rapidamente. 

@@ -1,0 +1,2 @@
+=== Conceitos básicos sobnre o protocolo HTTP ===
+Nesta seção, vamos detalhar os conceitos básicos sobre o protocolo HTTP que são essenciais para entender como a comunicação na web funciona, especialmente no contexto de APIs RESTful.

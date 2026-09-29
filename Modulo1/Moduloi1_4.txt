@@ -1,0 +1,44 @@
+=== Configuração do ambiente de desenvolvimento ===
+A configuração de um ambiente de desenvolvimento em Node.js envolve preparar o sistema para que você possa desenvolver, testar e depurar aplicações Node.js de forma eficiente. Aqui estão os principais componentes e passos necessários para configurar esse ambiente. 
+
+=-=-= Instalação do Node.js e npm =-=-=
+O Node.js é uma plataforma runtime baseada em JavaScript que permite a execução de código JavaScript fora do navegador, geralmnente no lado do servidor (NODE.JS,2023). ele foi construido sobre o motor V5 do Google Chrome, que compila JavaScript diretamente em código de máquina, tornando-o muito rápido e eficiente. 
+
+Quando você instala o Node.JS, ele vem automaticamente com npm (node package manager), que é o gerenciador de pacotes mais utilizado no escossistema JavaScript. O npm permite que você instale, atualize e gerencie bibliotecas e ferramentas necessárias para o desenvolvimento em Node.js. 
+
+OBS: Alternativamente, você pode usar o Yarn, outro gerenciador de pacotes que também depende do Node.js. O Yarn oferece funcionalidades semelhantes ao npm e é conhecido por sua velocidade e confiabilidade. 
+
+Desta forma, baixe e instale o Node.js (que inclui o npm) a partir do site oficial. Em seguida, verifique se o Node.js está instalado corretamente. Para isso, abra o terminal (no macOS ou Linux) ou o Prompt de Comando/PowerShell (no Windows) e digite o seguinte comando:
+
+node -v
+
+Este comando exibe a versão do Node.js instalado na máquina. 
+
+=-=-= Instalação de um editor de código =-=-=
+Para programação com Node.js, existem vários softwares e ferramentas que podem melhorar sua produtividade e facilitar o desenvolvimento. Recomendamos o Visual Studio Code (VS Code), que é um editor de código-fonte gratuito, leve e altamente extensível, desenvolvido pela Microsoft. É uma ferramenta multiplataforma que funciona em Windows, macOS e Linux. O VS Code é amplamente utilizado por desenvolvedores devido à sua interface amigável, suporte a várias linguagens de programação e grande quantidade de extensões disponíveis, que permitem personalizar e expandir sua funcionalidade para atender às necessidades específicas de desenvolvimento.
+
+O VS Code é um dos editores de código mais populares e é recomendado para o desenvolvimento em Node.js. Ele possui uma gama de extensões que facilitam o desenvolvimento, como suporte ao ESLint, Prettier, etc. Alguns dos principais recursos do VS Code incluem:
+
+    - Integração de controle de versão: Suporte integrado para Git, permitindo que os desenvolvedores gerenciem facilmente o controle de versão diretamente do editor.
+
+    - Depuração integrada: Ferramentas de depuração para várias linguagens de programação, incluindo JavaScript.
+
+    - Extensões: Um vasto marketplace de extensões que permite adicionar suporte a linguagens, temas, depuração adicional, integração de serviços, e muito mais.
+
+    - Terminal integrado: Um terminal integrado que permite executar comandos sem sair do editor.
+
+    - IntelliSense: Autocompletar código com sugestões inteligentes, com base no contexto do código e nas definições de tipos.
+
+    - Git e Controle de versão: Com o suporte integrado ao Git, o VS Code facilita o gerenciamento de repositórios de código diretamente do editor.
+
+O VS Code possui várias extensões que são extremamente úteis para o desenvolvimento em Node.js. Algumas das mais populares incluem:
+
+    - ESLint: Ferramenta para identificar e corrigir problemas no código JavaScript.
+
+    - Prettier: Um formatador de código que ajuda a manter a consistência na formatação do código.
+
+    - Debugger for Node.js:  Embora o VS Code tenha um depurador integrado, essa extensão específica oferece suporte extra para debugging em Node.js.
+
+Os ambientes de desenvolvimento integrado (IDEs) como Visual Studio e WebStorm oferecem uma experiência mais robusta com ferramentas integradas para desenvolvimento web. Entretanto, não são necessários para o conteúdo que vamos abordar neste curso.
+
+Uma outra alternativa, útil para testar pequenas partes de código, seria utilizar algum dos editores de código-fonte online. Estas são ferramentas baseadas na web que permitem aos desenvolvedores escrever, editar e testar código diretamente no navegador. Eles oferecem várias funcionalidades que facilitam o desenvolvimento de software sem a necessidade de instalar um ambiente de desenvolvimento local. Podemos citar os seguintes editores de código-fonte online: CodeSandbox, StackBlitz, CodePen, Codeanywhere e Replit.
