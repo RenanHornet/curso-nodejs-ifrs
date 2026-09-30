@@ -1,0 +1,15 @@
+=== Criação de rotas e Middlewares ===
+Nesta seção, vamos explorar o roteamento no Express.js com mais profundidade, incluindo como definir rotas e manipuladores de requisições e como utilizar middlewares para processar requisições e respostas. Esses conceitos são essenciais para construir aplicações web organizadas e eficientes no Express.
+
+Roteamento, em Node.js, refere-se ao processo de definir como uma aplicação web responde às solicitações de clientes em endpoints específicos (NODE.JS, 2024). Um endpoint é uma combinação de uma URL (ou caminho) e um método HTTP (como GET, POST, PUT ou DELETE) que identifica a operação solicitada. Basicamente, o roteamento estabelece um conjunto de regras e caminhos que guiam a aplicação a realizar ações específicas quando o usuário acessa determinadas URLs.
+
+No framework Express.js, o roteamento é configurado definindo rotas que correspondem a esses endpoints da aplicação. Cada rota pode:
+
+- Especificar um caminho, como /produtos ou /usuarios, para identificar o recurso.
+
+- Usar métodos HTTP, como GET, POST, PUT ou DELETE, para determinar o tipo de operação a ser realizada.
+
+- Executar uma função ou middleware que define o comportamento da aplicação ao acessar esse endpoint específico, controlando, por exemplo, quais dados devem ser exibidos, criados, atualizados ou excluídos. Cabe lembrar que middlewares são funções intermediárias que processam dados antes ou depois de uma requisição ser atendida, adicionando funcionalidades ou verificações.
+
+Esse sistema de roteamento é fundamental para organizar a lógica da aplicação, especialmente em APIs RESTful, pois permite responder de maneira consistente e modular a diferentes solicitações dos usuários.
+

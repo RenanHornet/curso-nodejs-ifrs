@@ -1,0 +1,167 @@
+=== Middleware ===
+No Express.js, um middleware é uma função que intercepta as requisições e respostas, podendo processar, modificar ou validar dados antes que a resposta final seja enviada ao cliente (NODE.JS, 2024). Middleware é uma das principais funcionalidades do Express, permitindo que você adicione diversas camadas de processamento às requisições.
+
+Cada middleware tem acesso aos objetos de requisição (req), resposta (res), e à função next. A função next() permite passar o controle para o próximo middleware na sequência. Isso permite criar uma cadeia de funções que podem executar ações, como autenticar o usuário, verificar permissões, registrar logs, entre outras.
+
+Vimos que no Express.js tanto manipuladores de rota quanto middlewares são funções que lidam com as requisições e respostas do servidor, podendo ser usados juntos. Considere um middleware que verifica se o usuário está autenticado antes de acessar qualquer rota:
+
+// Middleware para verificar autenticação
+const checkAuth = (req, res, next) => {
+        const autenticado = true; // Altere para `false` para simular um usuário não autenticado
+      
+      
+        if (autenticado) {
+          next(); // Usuário autenticado, continua para o próximo middleware ou rota
+        } else {
+          res.status(401).send("Acesso negado"); // Usuário não autenticado, responde com erro 401
+        }
+};
+      
+Esse middleware chama next() se o usuário estiver autenticado, permitindo que a requisição prossiga para o próximo middleware ou manipulador de rota. Caso contrário, ele encerra a requisição com uma mensagem de "Acesso negado".
+
+Imagine que queremos aplicar o middleware de autenticação apenas à rota /dashboard. O middleware checkAuth será aplicado antes do manipulador de rota, garantindo que somente usuários autenticados possam acessar o conteúdo do painel:
+
+// Rota com middleware específico
+app.get("/dashboard", checkAuth, (req, res) => {
+        res.send("Bem-vindo ao painel");
+});
+
+Neste exemplo:
+
+- Quando a rota /dashboard é acessada, o Express executa o middleware checkAuth.
+- Se checkAuth chama next(), o Express então executa o manipulador de rota que responde com "Bem-vindo ao painel".
+
+Veja como pode ficar seu arquivo server.js para testar estas funcionalidades:
+
+Para testar cada rota usando o REST Client no Visual Studio Code, você pode alterar o arquivo testes.rest da seguinte forma:
+
+Após escrever a requisição, um link “Send Request” aparecerá acima dela. Clique nesse link para enviar a requisição.
+
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 33
+ETag: W/"21-ScZeBm9ysiqiqAehxTso2RmhW/A"
+Date: Wed, 06 Nov 2024 08:49:40 GMT
+Connection: close
+    
+{
+      "message": "Bem-vindo ao painel"
+}
+
+=-=-= Tipode de Middleware =-=-=
+No Express, você pode usar middlewares de três tipos principais:
+
+- Middleware de Aplicação: Aplica-se globalmente a todas as rotas da aplicação.
+
+- Middleware de Rota: Aplica-se a rotas específicas.
+
+- Middleware Incorporado e de Terceiros: São middlewares que vêm com o Express ou de bibliotecas externas, como express.json() para processar JSON.
+
+O Middleware de Aplicação será executado para todas as requisições da aplicação. Por exemplo, um middleware para registrar logs de todas as requisições.
+
+const express = require("express");
+const app = express();
+const PORT = 3000;
+    
+// Middleware de log para todas as requisições
+app.use((req, res, next) => {
+      console.log(`${req.method} - ${req.url}`);
+      next(); // Passa para o próximo middleware ou rota
+});
+// Rota para a página inicial
+app.get("/", (req, res) => {
+      res.json({ message: "Página inicial" }); 
+});
+// Rota para a página "sobre"
+app.get("/sobre", (req, res) => {
+      res.json({ message: "Página sobre" }); 
+});
+// Inicia o servidor e faz com que ele escute na porta definida
+app.listen(PORT, () => {
+      console.log(`Servidor rodando em http://localhost:${PORT}`);
+});
+
+Neste exemplo, o middleware de log será executado para qualquer requisição, registrando o método HTTP e a URL no console antes de passar para a próxima etapa.
+
+Para testar cada rota usando o REST Client no Visual Studio Code, você pode alterar o arquivo testes.rest da seguinte forma:
+
+### Teste da rota GET /
+GET http://localhost:3000/
+
+### Teste da rota GET /sobre
+GET http://localhost:3000/sobre
+
+Após escrever a requisição, um link “Send Request” aparecerá acima dela. Clique nesse link para enviar a requisição. Por exemplo, veja o resultado após executar a rota raiz (/):
+
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 29
+ETag: W/"1d-tAAM9qVuh5w3cNpjTPRkUjzu214"
+Date: Wed, 06 Nov 2024 08:53:18 GMT
+Connection: close
+   
+{
+      "message": "Página inicial"
+}
+
+E, agora, o resultado após executar a requisição para a rota /sobre:
+
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 27
+ETag: W/"1b-xO8duZEKfbisXjf6Zg7R1fasJdI"
+Date: Wed, 06 Nov 2024 08:53:32 GMT
+Connection: close
+    
+{
+      "message": "Página sobre"
+}
+    
+Você pode aplicar middlewares apenas para uma rota específica. Por exemplo, vamos usar a rota /perfil com um middleware que verifica se o usuário tem acesso autorizado ao perfil:
+
+// Middleware para verificar acesso ao perfil
+const checkAccess = (req, res, next) => {
+        const authorized = true; // Altere para `false` para simular um usuário não autorizado
+        if (authorized) {
+          next(); // Usuário autorizado, passa para o próximo manipulador
+        } else {
+          res.status(403).json({ message: "Acesso ao perfil negado" }); // Resposta em JSON para não autorizado
+        }
+};
+// Rota /perfil com middleware específico
+app.get("/perfil", checkAccess, (req, res) => {
+        res.json({ message: "Bem-vindo ao seu perfil!" }); // Resposta em JSON para autorizado
+});
+
+O Express vem com alguns middlewares incorporados para processar diferentes tipos de dados. Por exemplo:
+
+- express.json(): Analisa requisições com conteúdo JSON.
+
+- express.urlencoded(): Processa dados codificados de formulários (tipo application/x-www-form-urlencoded).
+
+Veja um exemplo deste tipo de middleware abaixo:
+
+app.use(express.json()); // Processa JSON em requisições
+app.use(express.urlencoded({ extended: true })); // Processa dados de formulário
+app.post("/usuarios", (req, res) => {
+      const { nome, email } = req.body;
+      res.json({ message: `Usuário ${nome} com email ${email} criado!` }); 
+});
+
+Bibliotecas de terceiros também podem ser usadas como middlewares. Um exemplo popular é o morgan, que registra informações detalhadas de cada requisição. Para utilizar o Morgan, primeiro instale-o como uma dependência do seu projeto:
+
+npm i morgan
+
+Agora, no arquivo server.js, importe e configure o Morgan usando app.use(morgan('dev')). O formato 'dev' exibe logs com informações detalhadas de cada requisição:
+
+Observe que:
+
+- app.use(morgan('dev')): Adiciona o Morgan como middleware global para registrar logs de cada requisição que o servidor recebe. O formato 'dev' mostra informações como método HTTP, URL, status e tempo de resposta de forma concisa.
+
+- Rotas: Definimos duas rotas (/ e /sobre) para que possamos observar o Morgan registrando logs quando cada rota é acessada.
+
+- Iniciar o Servidor: O servidor escuta na porta 3000 e exibe uma mensagem no console quando está ativo.
+

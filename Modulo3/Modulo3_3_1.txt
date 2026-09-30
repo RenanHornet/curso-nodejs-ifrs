@@ -1,0 +1,254 @@
+=== Definindo rotas e manipuladores de requisições ===
+No Express.js, cada rota é composta por um URL (caminho) e um método HTTP (como GET, POST, PUT ou DELETE), além de um manipulador de requisição (ou handler) que lida com a requisição e a resposta (NODE.JS, 2024). Neste contexto, a estrutura básica de uma rota no Express é a seguinte:
+
+app.METODO_HTTP(caminho, (req, res) => {
+    // Função de tratamento da rota
+});
+
+Onde:
+
+- METODO_HTTP: Um método HTTP específico como GET, POST, PUT e DELETE.
+
+- caminho: A URI que o cliente acessa para chegar a essa rota (ex.: "/produtos", "/usuarios/:id").
+
+- (req, res) => { ... }: A função que define a lógica da resposta para essa rota.
+
+Para ilustrar, no exemplo abaixo, definimos uma rota simples no Express.js para responder a uma requisição HTTP do tipo GET no endpoint "/" (a página inicial da aplicação). Desta forma, crie um arquivo chamado server.js com o seguinte código:
+
+// Importa o módulo Express
+const express = require("express");
+
+// Cria uma instância do aplicativo Express
+const app = express();
+    
+// Define a porta em que o servidor irá rodar
+const PORT = 3000;
+    
+// Define uma rota GET para o caminho raiz ("/")
+app.get("/", (req, res) => {
+      // Envia uma resposta em JSON para o cliente
+      res.json({ message: "Olá, Mundo!" });
+});
+    
+// Inicia o servidor e faz com que ele escute na porta definida
+app.listen(PORT, () => {
+      // Exibe uma mensagem no console informando que o servidor está em execução
+      console.log(`Servidor rodando em http://localhost:${PORT}`);
+});
+
+Neste curso, utilizamos a extensão REST Client do VS Code para testar os endpoints da aplicação. Neste contexto, crie uma pasta nome “request” em seu projeto .Em seguida, dentro desta pasta, crie um arquivo com o nome de sua preferência com a extensão “.rest”, por exemplo, testes.rest.
+
+No arquivo testes.rest, insira a seguinte requisição requisição HTTP para acessar a rota raiz (/) do servidor:
+
+GET http://localhost:3000/
+
+Após escrever a requisição, um link “Send Request” aparecerá acima dela. Clique nesse link para enviar a requisição. O REST Client enviará a requisição GET para o servidor Node.js no endereço http://localhost:3000/. A resposta do servidor será exibida no painel de saída do REST Client, mostrando o código de status HTTP e o corpo da resposta em JSON.
+
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 26
+ETag: W/"1a-hFwWj6/Mus85PVt7ROvapHkqfGA"
+Date: Wed, 06 Nov 2024 08:34:16 GMT
+Connection: close
+    
+{
+      "message": "Olá, Mundo!"
+}
+
+=-=-= Métodos de roteamento =-=-=
+No Express.js, métodos de roteamento se referem aos métodos HTTP que o Express disponibiliza para lidar com requisições. Cada método define como o servidor deve reagir a diferentes tipos de requisições de clientes. Os métodos de roteamento mais comuns no Express são GET, POST, PUT, DELETE, entre outros.
+
+O código a seguir é um exemplo de rotas o caminho “/produtos” e que estão definidas para os métodos GET, POST, PUT e DELETE. Atualize o arquivo server.js com este código:
+
+const express = require("express");
+const app = express();
+const PORT = 3000;
+// Rota GET para listar todos os produtos
+app.get("/produtos", (req, res) => {
+      res.json({ message: "Listando todos os produtos", produtos: [] }); // Exemplo com um array vazio de produtos
+});
+// Rota POST para criar um novo produto
+app.post("/produtos", (req, res) => {
+      res.json({
+        message: "Criando um novo produto",
+        produto: { id: Date.now(), nome: "Produto Exemplo" },
+      });
+});
+// Rota PUT para atualizar um produto por ID
+app.put("/produtos/:id", (req, res) => {
+      const { id } = req.params;
+      res.json({
+        message: "Atualizando o produto",
+        produto: { id: id, nome: "Produto Atualizado" },
+      });
+});
+// Rota DELETE para excluir um produto por ID
+app.delete("/produtos/:id", (req, res) => {
+      const { id } = req.params;
+      res.json({ message: "Excluindo o produto", produtoId: id });
+});
+// Inicia o servidor e faz com que ele escute na porta definida
+app.listen(PORT, () => {
+      console.log(`Servidor rodando em http://localhost:${PORT}`);
+});
+    
+Neste exemplo:
+- GET /produtos: Rota para listar produtos.
+- POST /produtos: Rota para criar um novo produto.
+- PUT /produtos/:id: Rota para atualizar um produto pelo ID.
+- DELETE /produtos/:id: Rota para excluir um produto pelo ID.
+
+Ao usar o REST Client, é possível declarar variáveis para definir valores reutilizáveis, como o endpoint da API, facilitando a manutenção e a consistência do script. Para isso, basta declarar a variável em uma nova linha com a seguinte sintaxe: @variableName = valor. As requisições dentro do arquivo podem então referenciar essa variável usando a notação {{variableName}}. Isso permite que, se o valor do endpoint precisar ser alterado, seja suficiente modificá-lo apenas na declaração da variável, atualizando automaticamente todas as requisições que a utilizam.
+
+Neste contexto, você pode alterar o arquivo testes.rest da seguinte forma:
+
+@baseURL = http://localhost:3000
+
+### Teste da rota GET /produtos
+GET {{baseURL}}/produtos
+    
+### Teste da rota POST /produtos
+POST {{baseURL}}/produtos
+Content-Type: application/json
+    
+{
+      "nome": "Novo Produto",
+      "preco": 100.0
+}
+    
+### Teste da rota PUT /produtos/:id
+PUT {{baseURL}}/produtos/1
+Content-Type: application/json
+    
+{
+      "nome": "Produto Atualizado",
+      "preco": 150.0
+}
+    
+### Teste da rota DELETE /produtos/:id
+DELETE {{baseURL}}/produtos/1
+
+Após escrever cada requisição, um link “Send Request” aparecerá acima delas. Clique nesse link para enviar cada requisição. Por exemplo, veja abaixo o resultado da requisição POST:
+
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 93
+ETag: W/"5d-OhYGsOVj/OqVgL0PCjlccB2767g"
+Date: Wed, 06 Nov 2024 08:42:52 GMT
+Connection: close
+    
+{
+      "message": "Criando um novo produto",
+      "produto": {
+        "id": 1730882572049,
+        "nome": "Produto Exemplo"
+      }
+}
+    
+=-=-= Tipos de caminhos e rotas =-=-=
+
+O Express permite definir caminhos de rotas de diversas maneiras para lidar com diferentes padrões de URL. Os caminhos de uma rota podem conter uma sequência de caracteres, padrões de sequência ou expressões regulares.
+
+OBS: O Express Route Tester é uma ferramenta online que permite testar e visualizar rotas para aplicativos Express.js sem precisar configurar um servidor completo.
+
+--- Caminho simples ---
+Um caminho simples representa uma URL exata que o servidor deve corresponder:
+
+app.get("/sobre", (req, res) => {
+    res.send("Página Sobre");
+});
+
+Aqui, uma requisição GET para "/sobre" dispara a função de tratamento que responde com "Página Sobre".
+
+No exemplo abaixo, o caminho corresponde a solicitações à rota raiz /:
+
+app.get("/", (req, res) => {
+    res.send("raiz");
+});
+
+--- padrões de sequência ---
+Abaixo mostra um exemplo de caminho de rota que corresponde ao padrão de sequência acd e abcd:
+
+app.get("/ab?cd", (req, res) => {
+    res.send("ab?cd");
+});
+
+Este caminho de rota irá corresponder ao abcd, abxcd, abRANDOMcd, ab123cd, etc.
+
+app.get("/ab*cd", (req, res) => {
+    res.send("ab*cd");
+});
+
+--- Expressões regulares ---
+O Express também permite o uso de expressões regulares para criar rotas mais complexas, restringindo padrões válidos de URL.
+
+app.get("/item/:codigo([0-9]{5})", (req, res) => {
+    res.send(`Código do item: ${req.params.codigo}`);
+});
+
+Aqui, :codigo([0-9]{5}) permite apenas números de 5 dígitos. Se alguém tentar acessar /item/abcde, o Express não encontrará uma correspondência. Mas se acessar /item/12345, a resposta será Código do item: 12345.
+
+--- Caminhos dinâmicos com parâmetros de rota ---
+Parâmetros de rota permitem capturar partes da URL como variáveis, tal como :id:
+
+app.get("/produtos/:id", (req, res) => {
+    const id = req.params.id;
+    res.send(`Produto ID: ${id}`);
+});
+
+Neste caso:
+
+- ":id" é um parâmetro de rota que captura o valor que vier depois de /produtos/.
+- O valor de id estará disponível em req.params.id.
+- Se o cliente acessar /produtos/123, o servidor responderá com Produto ID: 123.
+
+--- Caminhos com vários parâmetros de rota ---
+O Express permite usar múltiplos parâmetros de rota na mesma URL:
+
+app.get("/usuarios/:usuarioId/posts/:postId", (req, res) => {
+    const { usuarioId, postId } = req.params;
+    res.send(`Usuário: ${usuarioId}, Post: ${postId}`);
+  });
+
+Acessando /usuarios/45/posts/67, a resposta será Usuário: 45, Post: 67.
+
+--- Caminhos com roteamento opcional ---
+O Express permite tornar parte do caminho opcional usando um ? após o nome do parâmetro:
+
+app.get("/produtos/:id?", (req, res) => {
+    if (req.params.id) {
+        res.send(`Produto ID: ${req.params.id}`);
+      } else {
+        res.send("Lista de produtos");
+      }
+    });
+
+Neste exemplo:
+
+- Se id for fornecido, a resposta será Produto ID: valor.
+- Se id não for fornecido (acesso apenas em /produtos), a resposta será Lista de produtos.
+
+=-=-= Manipuladores de rotas ===
+No Express, os manipuladores de rota (ou route handlers) são funções de callback que definem o que o servidor deve fazer quando uma rota específica é acessada. Eles lidam com a requisição e a resposta, podendo executar várias ações, como acessar um banco de dados, validar dados ou enviar uma resposta ao cliente.
+
+Um manipulador de rota, neste contexto, é uma função que define como a aplicação deve responder a uma requisição feita para uma URL específica e um método HTTP específico (como GET, POST, PUT, DELETE). A função recebe três parâmetros principais:
+
+- req (Request): Representa a requisição feita pelo cliente. Contém informações como parâmetros, query strings, cabeçalhos e o corpo da requisição.
+
+- res (Response): Representa a resposta que será enviada ao cliente. É usado para definir o conteúdo da resposta, o status HTTP e outros cabeçalhos.
+
+- next (opcional): Uma função que passa o controle para o próximo manipulador de rota ou middleware na sequência.
+
+Desta forma, uma rota pode ser manipulada com uma única função, que lida com toda a lógica de resposta, como no quadro abaixo:
+
+app.get("/home", (req, res) => {
+    res.send("Bem-vindo à página inicial");
+});
+
+Assim, os manipuladores de rota lidam diretamente com o processamento final da requisição, muitas vezes enviando uma resposta ao cliente.
+
+
+
+

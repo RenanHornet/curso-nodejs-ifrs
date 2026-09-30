@@ -1,0 +1,33 @@
+=== Criando um servidor HTTP com Express.js ===
+Criar um servidor HTTP com Express.js é simples. Primeiro, crie e acesse uma pasta para o projeto, onde serão organizados todos os arquivos e configuações.
+
+mkdir node-express
+cd node-express
+
+Em seguida, inicie o projeto criando o arquivo package.json, que será responsável por gerenciar as dependências e configurações do projeto.
+
+npm init -y
+
+Com o projeto inicializado, instale o Express.js:
+
+npm i express
+
+Instale o Nodemon no projeto para que ele monitore mudanças nos arquivos e reinicie o servidor automaticamente ao salvar. No terminal, digite o comando de instalação:
+
+npm i nodemon --save-dev
+
+Você pode, agora, abrir a aplicação no editor Visual Studio Code.
+
+code .
+
+Abra o arquivo package.json e, na seção "scripts", adicione o script "dev" para iniciar o servidor com o Nodemon.
+
+"scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node server.js", 
+        "dev": "nodemon server.js"
+},
+
+Para executar o servidor usando o Nodemon, digite o seguinte comando:
+
+npm run dev

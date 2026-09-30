@@ -1,0 +1,124 @@
+=== Introdução ao Express.js ===
+O Express.js é um framewok minimalista e flexíel para construir aplicações web e APIs em Node.js (MARDAN, 2018). Desenvolvido com o intuito de siplificr o processo de criação de servidores e facilitar o desenvolvimento de aplicativos escaláveis, ele se tornou uma das ferramentas mais populares para desenvolvedores de JavaScript no lado do servidor (FREITAS et al.,2021). Vamos explorar os fundamentos do Express.js, seu histórico, vantagens e desvantagens. 
+
+=-=-= Fundamentos do Express.js =-=-=
+O Node.js é extremamente poderoso pra construir aplicações de rede e servidores de alto desempenho. No entanto, algumas funcionalidades comuns no desenvolvimento web não são oferecidas diretamente por ele. Por exemplo, gerenciar diferentes métodos HTTP (como GET, POST, DELETE, PUT), lidar com várias URLs (rotas) ou gerar respostas dinâmicas com templates pode ser tornar trabalhoso usando apenas o Node.js(PEREIRA,2016). Para resolver essas limitações e facilitar o desenvolvimento, é comum utilizar web framewoks que ajudarm a estruturar e organizar o código.
+
+Um dos framewoks mais populares para o Node.js é o Express.js. O Express.js atu cmo uma camada sobre o Node.js, fornecendo uma interface simples e poderosa para criar aplicações web e APIs de maneira organizada e modular. O Express simplifica o provesso de desenvolvimento com soluções que permitem: 
+
+- Gerenciar múltiplos métodos HTTP em diferentes rotas: O Express facilita a definição de rotas específicas para cada método HTTP, organizando os pontos de entrada da aplicação para diferentes tipos de requisição.
+
+- Integrar view engines para gerar páginas dinâmicas: Embora o Express seja mais frequentemente usado para APIs RESTful (que geralmente retornam JSON), ele também suporta view engines (motores de renderização de templates) para gerar HTML dinâmico.
+
+- Configurações globais da aplicação: No Express, você pode definir configurações como a porta de conexão e o diretório onde os templates HTML (caso use) estão localizados, padronizando a estrutura da aplicação.
+
+Uso de Middlewares: Middlewares são funções que processam requisições antes que a resposta final seja enviada ao cliente. Eles são úteis para tarefas como autenticação, validação de dados, tratamento de erros e logging.
+
+=-=-= Histórico do Express.js =-=-=
+O Express.js foi criado em 2010 por TJ Holowaychuk com o objetivo de fornecer uma maneira mais rápida e conveniente de desenvolver servidores em Node.js. O Express surgiu em um momento em que o Node.js ainda estava se estabelecendo como uma tecnologia popular para desenvolvimento de back-end, e o framework ajudou a acelerar a adoção do Node.js, especialmente entre desenvolvedores que já conheciam o JavaScript.
+
+Desde seu lançamento, o Express se tornou parte fundamental do MEAN stack (MongoDB, Express, Angular, Node.js) e do MERN stack (MongoDB, Express, React, Node.js), frameworks amplamente usados para o desenvolvimento de aplicações full-stack em JavaScript (CODEWELL, 2017). Em 2014, o projeto foi transferido para a OpenJS Foundation e continua a ser mantido ativamente, recebendo atualizações e melhorias da comunidade.
+
+=-=-= Principais características dp Express.js =-=-=
+
+--- Minimalista ---
+O Express é um framework minimalista, ou seja, ele fornece apenas funcionalidades essenciais e deixa outras responsabilidades ao desenvolvedor. Essa simplicidade permite que os desenvolvedores implementem apenas as ferramentas de que realmente precisam, adicionando pacotes de middleware conforme necessário. O minimalismo do Express é uma vantagem em projetos que exigem flexibilidade e baixo consumo de recursos.
+
+O código abaixo, por exemplo, cria um servidor que responde a requisições GET na rota raiz (/). Observe que o Express fornece apenas o necessário para criar o servidor e definir a rota.
+
+const express = require("express");
+const app = express();
+
+app.get("/", (req, res) => {
+      res.send("Bem-vindo ao Express!");
+});
+   
+app.listen(3000, () => {
+      console.log("Servidor rodando em http://localhost:3000");
+});
+
+--- Modularidade com Middlewares ---
+Middlewares são uma das funcionalidades mais poderosas do Express (SKINNER, 2014). Eles são funções que executam antes, durante ou após o processamento de uma requisição, e podem ser usados para manipular a requisição, a resposta ou controlar o fluxo de execução. O Express permite que middlewares sejam adicionados de forma modular, permitindo que a lógica da aplicação seja dividida em etapas e simplificando a manutenção.
+Veja abaixo alguns tipos de Middlewares no Express:
+
+- Middleware de Aplicação: Executado para todas as rotas e métodos HTTP, útil para configurar autenticação, logs e validação de dados.
+
+- Middleware de Rota: Executado em rotas específicas para adicionar lógica antes de uma resposta ser enviada.
+
+- Middleware Integrado: O Express vem com middlewares embutidos, como express.json() para processar JSON enviados em requisições. Ela é usada para converter automaticamente o JSON recebido em um objeto JavaScript acessível na rota.
+
+- Middleware de Tratamento de Erros: Manipula erros que ocorrem na aplicação e pode enviar mensagens de erro específicas para o cliente.
+
+Middlewares permitem adicionar funcionalidades incrementais, como autenticação e validação, de forma modular e reutilizável. Veja no código abaixo um exemplo de uso de Middleware:
+
+// Middleware para registrar o método, a URL e o horário de cada requisição 
+app.use((req, res, next) => {
+        const now = new Date().toISOString();
+        console.log(`[${now}] Requisição recebida: ${req.method} ${req.url}`);
+        next();
+});
+      
+Este código é um middleware que registra no console todas as requisições feitas ao servidor. Ele mostra o método HTTP (como GET ou POST) e a URL da requisição. Após registrar a informação, ele chama next() para que a execução continue para o próximo middleware ou rota, garantindo que o fluxo do aplicativo não seja interrompido.
+
+--- Flexibilidade de roteamento ---
+O Express fornece um sistema de roteamento poderoso e flexível, que permite associar URLs específicas a funções de tratamento (OLIVEIRA, 2021). É possível definir rotas para diferentes métodos HTTP (como GET, POST, PUT e DELETE) e para URLs dinâmicas que aceitam parâmetros.
+
+Sobre o roteamento dinâmico e hierárquico:
+- Parâmetros de Rota: O Express permite capturar partes variáveis da URL, como IDs de recursos, e passar essas informações para o manipulador de rota.
+
+- Roteamento Hierárquico: As rotas podem ser organizadas em um roteador modular, facilitando a organização do código em aplicações maiores.
+
+Vejamos abaixo um exemplo de roteamento com parâmetros de rota:
+
+app.get("/produtos/:id", (req, res) => {
+    const { id } = req.params;
+    res.send(`Produto ID: ${id}`);
+});
+
+--- Não-Opinativo---
+O Express é um framework não-opinativo, o que significa que ele não impõe uma maneira específica de estruturar seu projeto ou de organizar as rotas e middlewares. Diferente de frameworks opinativos, que possuem "opiniões" sobre como resolver problemas específicos, o Express oferece liberdade total ao desenvolvedor para estruturar o projeto da maneira que preferir.
+
+Veja abaixo uma descrição comparativa entre os frameworks opinativos e os não-opinativos:
+
+- Frameworks opinativos: oferecem uma estrutura rígida e padrões definidos para organizar o projeto. Isso pode ser útil para iniciantes, pois traz uma organização padronizada, mas limita a flexibilidade.
+
+- Frameworks não-opinativos: permitem que o desenvolvedor escolha a estrutura e os componentes do projeto. Você pode usar os middlewares e bibliotecas que desejar, definir sua própria estrutura de pastas e arquivos, e organizar o projeto de acordo com as necessidades específicas.
+
+Cabe salientar que essa estrutura não é imposta pelo Express, mas é uma prática comum para organizar projetos de forma modular e escalável. Entretanto, o Express.js oferece em seu site oficial o Express Application Generator, ferramenta que permite criar rapidamente a estrutura de um aplicativo Express básico. Ele gera uma estrutura padrão de diretórios e arquivos para ajudar os desenvolvedores a começar um projeto rapidamente, promovendo boas práticas e organizando o código de maneira modular e escalável.
+
+--- Suporte  templates (View Engines) ---
+Embora o Express seja amplamente usado para criar APIs RESTful que retornam JSON, ele também suporta view engines (ou mecanismo de visualização) que permitem gerar HTML dinâmico. No Node.js, uma view engine é uma ferramenta que permite a renderização de templates dinâmicos em aplicativos web. Ela gera HTML com base nos dados que o servidor fornece, permitindo a criação de páginas dinâmicas que podem se adaptar a diferentes dados ou condições. No contexto de frameworks como o Express.js, as view engines são usadas para renderizar conteúdo HTML antes de enviá-lo ao cliente (navegador).
+
+Veja abaixo as principais view engines em projetos com Node.js:
+
+- Pug: Motor de templates com uma sintaxe concisa, popular no Express.
+
+- EJS: Motor de templates que permite inserir código JavaScript diretamente no HTML.
+
+- Handlebars: Uma opção com suporte a templates mais sofisticados, útil para renderizar layouts complexos.
+
+Veja abaixo um exemplo de uso do EJS em projetos com Node.js:
+
+// Configurando EJS como view engine
+app.set('view engine', 'ejs');
+
+// Rota para renderizar uma página HTML
+app.get('/home', (req, res) => {
+      res.render('home', { title: 'Página Inicial', mensagem: 'Bem-vindo ao Express!' });
+});
+
+--- Vantagens do Express.js ---
+O Express.js é amplamente adotado por várias razões. Aqui estão algumas das principais vantagens do framework:
+
+- Simplicidade e Flexibilidade: A simplicidade do Express permite que você comece rapidamente e adicione apenas as funcionalidades necessárias. Sua flexibilidade o torna ideal para uma grande variedade de projetos, desde APIs RESTful até aplicações full-stack.
+
+- Enorme Comunidade e Ecossistema: Express tem uma vasta comunidade, com muitas bibliotecas e pacotes que facilitam a expansão de funcionalidades da aplicação.
+
+- Modularidade com Middlewares: A capacidade de adicionar middlewares de forma modular torna o Express altamente extensível. Existem middlewares para quase tudo, como autenticação, validação, tratamento de erros, compressão e muito mais.
+
+--- Desvantagens do Express.js ---
+Embora o Express.js seja amplamente utilizado e ofereça diversas vantagens, ele também apresenta algumas desvantagens que devem ser consideradas:
+
+- Falta de Estrutura Padrão: Como o Express não impõe uma estrutura rígida, ele pode se tornar difícil de organizar em projetos grandes. Isso exige que o desenvolvedor adote boas práticas para manter o código organizado.
+
+- Configuração Manual: Algumas funcionalidades, como autenticação ou integração com banco de dados, precisam ser configuradas manualmente, o que pode aumentar a complexidade em projetos maiores.
