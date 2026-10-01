@@ -1,0 +1,65 @@
+=== Manipulação de parâmetros de rotas e query strings ===
+A manipulação de parâmetros de rota e query strings em Express.js é uma parte essencial do desenvolvimento de APIs, pois permite que o servidor receba e responda a requisições com base em valores fornecidos pelo cliente (NODE.JS, 2024). Nesta seção está uma explicação detalhada com exemplos de como lidar com essas duas formas de passar dados em URLs.
+
+=-=-= Parâmetros de rotas =-=-=
+Os parâmetros de rota fazem parte da URL e são definidos com o uso de : seguido do nome do parâmetro. Eles são usados quando queremos capturar partes da URL para processar no servidor, como o ID de um recurso.
+
+Veja no código abaixo um exemplo de manipulação de parâmetros de rota:
+
+const express = require("express");
+const app = express();
+const PORT = 3000;
+    
+// Rota com parâmetro de rota :id
+app.get("/usuarios/:id", (req, res) => {
+      const { id } = req.params; // Extrai o parâmetro 'id' da URL
+      res.json({ message: `Buscando o usuário com ID: ${id}` });
+});
+    
+app.listen(PORT, () => {
+      console.log(`Servidor rodando em http://localhost:${PORT}`);
+});   
+
+Se o cliente fizer uma requisição para http://localhost:3000/usuarios/123, a resposta será:
+
+
+{
+  "message": "Buscando o usuário com ID: 123"
+}
+
+=-=-= Query strings =-=-=
+As query strings são pares de chave-valor passados após o símbolo ? na URL. Elas são usadas para enviar dados adicionais na requisição de forma não hierárquica.
+
+Veja abaixo um exemplo de manipulação de query strings:
+
+app.get("/produtos", (req, res) => {
+const { categoria, precoMaximo } = req.query; // Extrai os valores da query string
+res.json({
+      message: "Listando produtos",
+      filtros: {
+        categoria: categoria || "Todas",
+        precoMaximo: precoMaximo || "Sem limite"
+      }
+    });
+});
+  
+Desta forma, se o cliente fizer uma requisição para o caminho http://localhost:3000/produtos?categoria=eletronicos&precoMaximo=1000, a resposta será:
+
+{
+    "message": "Listando produtos",
+    "filtros": {
+      "categoria": "eletronicos",
+      "precoMaximo": "1000"
+    }
+}
+  
+Se a URL for acessada sem query strings, a resposta usará valores padrão:
+
+{
+    "message": "Listando produtos",
+    "filtros": {
+      "categoria": "Todas",
+      "precoMaximo": "Sem limite"
+    }
+}
+  
