@@ -1,0 +1,70 @@
+=== Introdução a manipulação de dados ===
+A manipulação de dados é um dos aspectos fundamentais no desenvolvimento de aplicações web e sistemas que interagem com usuários e serviços externos (FREITAS et al., 2021). No contexto de aplicações em Node.js, essa prática envolve a leitura, escrita, atualização e organização de dados de forma eficiente no servidor, garantindo uma comunicação eficaz entre o servidor e o cliente. 
+
+Nesta seção, exploraremos os conceitos básicos sobre manipulação de dados no servidor, utilizando Node.js como base (CODEWLL, 2017). Veremos como o formato JSON (JavaScript Object Notation) se tornou o padrão de troca de dados devido à sua simplicidade e compatibilidade com diversas linguagens de programação (MARDAN. 2018). O JSON permite a representação de dados estruturados de maneira fácil de ler e escrever, o que facilita a transmissão de informações entre sistemas de maneira rápida e eficiente. 
+
+=-=-= Conceitos básicos sobre manipulação de dados no servidor =-=-=
+A manipulação de dados no servidor refere-se à capacidade de um servidor de processar, transformar, armazenar e enviar dados em resposta às solicitações dos clientes. Em um ambiente Node.js, essa manipulação é fundamental, já que muitas aplicações exigem o processamento de dados em tempo real, a interação com bancos de dados e a troca de informações com APIs externas (OLIVEIRA, 2021).
+
+O Node.js é conhecido por sua natureza assíncrona e orientada a eventos, o que o torna altamente eficiente para manipulação de grandes volumes de dados (SKINNER, 2014; NODE.JS, 2024). Com o uso de módulos e bibliotecas do Node.js, como o fs para manipulação de arquivos, o http para lidar com requisições dos clientes e querystring para processar strings de consulta, os desenvolvedores podem facilmente criar funcionalidades que lidam com diversos tipos de dados.
+
+Veja abaixo um exemplo de leitura e escrita de dados em um arquivo com Node.js:
+
+const fs = require("fs");
+
+// Escrever dados em um arquivo
+fs.writeFile("dados.txt", "Olá, Node.js!", (err) => {
+      if (err) {
+        console.error("Erro ao escrever o arquivo:", err);
+        return;
+      }
+      console.log("Arquivo salvo com sucesso!");
+});
+    
+// Ler dados de um arquivo
+fs.readFile("dados.txt", "utf-8", (err, data) => {
+      if (err) {
+        console.error("Erro ao ler o arquivo:", err);
+        return;
+      }
+      console.log("Conteúdo do arquivo:", data);
+});
+
+Nesse exemplo, a manipulação de dados é realizada através da escrita e leitura de um arquivo de texto usando métodos assíncronos do módulo fs.
+
+=-=-= Introdução ao formato JSON como padrão de troca de dados =-=-=
+O JSON (JavaScript Object Notation) é um formato de troca de dados leve, fácil de ler e escrever para humanos, e fácil de analisar e gerar para máquinas (PEREIRA, 2016). Tornou-se o padrão de fato para troca de dados em aplicações web por ser uma estrutura de dados simples e por sua compatibilidade nativa com JavaScript.
+
+O JSON é amplamente utilizado para transmitir dados entre um cliente e um servidor, devido à sua capacidade de representar estruturas de dados complexas, como arrays e objetos, de forma fácil de entender. Em Node.js, a manipulação de dados em formato JSON é uma tarefa comum em quase todas as aplicações que interagem com APIs, bancos de dados e outras fontes de dados.
+
+Veja abaixo um exemplo mostrando a estrutura básica de um objeto JSON:
+
+{
+    "nome": "João",
+    "idade": 25,
+    "hobbies": ["leitura", "esportes", "programação"]
+}
+
+No Node.js, é fácil converter um objeto JavaScript em uma string JSON e vice-versa, usando os métodos JSON.stringify() e JSON.parse().
+
+Veja abaixo um exemplo de manipulação de JSON em Node.js:
+
+const dados = {
+    nome: "Maria",
+    idade: 30,
+    profissao: "Engenheira"
+};
+  
+// Converter objeto JavaScript para JSON
+const jsonString = JSON.stringify(dados);
+console.log('String JSON:', jsonString);
+  
+// Converter string JSON para objeto JavaScript
+const jsonObject = JSON.parse(jsonString);
+console.log('Objeto JavaScript:', jsonObject);
+  
+Nesse contexto, o JSON é amplamente adotado como padrão de troca de dados no mercado devido às seguintes características:
+
+Simplicidade: A estrutura de dados é leve e de fácil compreensão.
+Compatibilidade: Suporte nativo em JavaScript, tornando o uso direto e intuitivo em aplicações Node.js.
+Interoperabilidade: Pode ser facilmente integrado com outros sistemas e linguagens de programação.

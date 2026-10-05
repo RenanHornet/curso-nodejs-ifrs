@@ -1,0 +1,31 @@
+=== Introdução ao MySQL ===
+O mySQL é um sistema de gerenciamento de banco de dados relacional (SGBD) de código aberto amplamente utilizado em uma variedade de aplicações, especialemnte em projetos de software de código aberto e sistemas de médio a grande porte. Ele emprega linguagem SQL (Structured Query Language - Linguagem de Consulta Estruturada), que é a linguagem padrão mais popular para inserção, Consulta e manipulação de dados armazenados em banco de dados. 
+
+=-=-= Origem e evolução do MySQL =-=-=
+O MySQL foi originalmente desenvolvido pela empresa suea MYSQL AB, e sua primeira versão foi lancaçada em maio de 1995. Com o passar dos anos, devido à sua estabildiade, eficiênmcia e simplicidade, tornou-se um dos sistemas de gerenciamento de banco de dados mais amplamente adotado. Em 2008, a Sun Microsystems adquiriu a MySQL AB, e, posteriomente, em janeiro de 2010 a Sun foi comprada pela Oracle Corporation em sua transição bilionária. 
+
+Após a aquisição pela Oracle, algumas preocupações surgiram em torno da manutenção da versão de código aberto no MySQL, levando a comunidade a criar um fork chamado MariaDB. O MariaDB foi desenvolvido para manter a continuidade da versão aberta e gratuita do MySQL, garantindo compatibilidade com as versões anteriores e nova funcionalidades para evitar uma possível limitação da versão comunitária do MySQL sob a Oracle. 
+
+=-=-= Instalação e configuração do MySQL =-=-=
+Para utilizar o MySQL, é necessário configurar tanto o servidor quanto um cliente que permita a interação com o banco de dados. O servidor MySQL é o componente central responsável por gerenciar os dados, responder a consultas e operações de clientes, manter a consistência dos dados e lidar com transações concorrentes. O cliente é o intermediário que se comunica com o servidor, utilizando a linguagem SQL para enviar comandos e receber respostas.
+
+Antes de iniciarmos o desenvolvimento de um projeto prático, é fundamental garantir que o MySQL esteja devidamente instalado e configurado em seu computador. A versão gratuita do MySQL é chamada de MySQL Community Server.
+
+Existem várias opções de clientes de banco de dados que podem ser usados para gerenciar bancos de dados MySQL. Esses clientes oferecem interfaces gráficas que tornam mais fácil a administração e interação com os dados. Aqui estão alguns das principais aplicações clientes de banco de dados para MySQL:
+
+- MySQL Workbench: É a ferramenta oficial da Oracle para gerenciamento de bancos de dados MySQL. Oferece uma interface amigável para administração de banco de dados, modelagem de dados, execução de consultas SQL, e manutenção de servidores.
+
+- DBeaver: Um cliente de banco de dados de código aberto e multiplataforma que suporta MySQL e muitos outros bancos de dados. É amplamente utilizado por desenvolvedores e administradores por sua interface rica em recursos.
+
+- HeidiSQL: Um cliente de banco de dados gratuito e leve que é popular para uso com MySQL. É conhecido por sua simplicidade e eficiência em tarefas de administração de banco de dados.
+
+- phpMyAdmin: Um cliente web amplamente utilizado para a administração de bancos de dados MySQL. Ele permite o gerenciamento de bancos de dados por meio de um navegador e é frequentemente usado em ambientes de desenvolvimento local como parte do XAMPP, WAMP ou MAMP.
+
+Outra opção seria utilizar um plugin do Visual Studio Code (VSCode) para interagir com bancos de dados diretamente da IDE. Segue abaixo alguns exemplos deste plugins:
+
+- SQLTools: Uma das extensões mais populares para trabalhar com bancos de dados no VSCode. Oferece suporte a MySQL e outros sistemas de gerenciamento de banco de dados, permitindo que os usuários executem consultas SQL, visualizem e gerenciem resultados diretamente na interface do VSCode.
+
+
+- SQLTools MySQL/MariaDB Driver: Um plugin complementar ao SQLTools que adiciona suporte específico para MySQL e MariaDB.
+
+- Database Client: é uma extensão para o Visual Studio Code que facilita a gestão de diversos sistemas de banco de dados diretamente na interface do editor. Desenvolvida por Weijan Chen, essa ferramenta suporta múltiplos SGBDs, incluindo MySQL/MariaDB, PostgreSQL, SQLite, Redis, ClickHouse, Kafka, MongoDB, Snowflake e ElasticSearch.

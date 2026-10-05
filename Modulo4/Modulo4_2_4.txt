@@ -1,0 +1,46 @@
+=== Configuração e conexão com MySQL ===
+Para uma aplicação Node.js se conecte com a banco de dados relacionais, é necessário instalar pacotes específicos que façam a ponte entre o Node.js e o banco de dados escolhido. A biblioteca mys1l2 é uma das mais populares para conectar aplicações Node.js a banco de dados MySQL e MariaDB. ela oferece uma interface rápida e fácil de usar, suportando consultas assíncronas e promessas (promises). 
+
+Antes de iniciar a configuração, é necessário instalar o pacote mysql2 no projeto. Use o seguinte comando para instalá-lo:
+
+npm i mysql2
+
+A seguir, vamos configurar a conexão com o banco de dados. Vamos criar um arquivo chamado server.js. Neste arquivo, primeiro, importe a biblioteca e configure a conexão fornecendo as credenciais necessárias, como host, usuário, senha e nome do banco de dados.
+
+const mysql = require("mysql2"); // Importa a biblioteca mysql2
+
+// Cria a conexão com o banco de dados MySQL
+const connection = mysql.createConnection({
+      host: "localhost", // Endereço do servidor MySQL (ou IP)
+      user: "seu_usuario", // Nome de usuário do MySQL
+      password: "sua_senha", // Senha do usuário
+      database: "exemplo_db", // Nome do banco de dados
+});
+// Conecta ao banco de dados
+connection.connect((err) => {
+      if (err) {
+        console.error("Erro ao conectar ao banco de dados:", err);
+        return;
+      }
+      console.log("Conectado ao banco de dados MySQL com sucesso!");
+      // Fecha a conexão após o teste
+      connection.end((endErr) => {
+        if (endErr) {
+          console.error("Erro ao encerrar a conexão:", endErr);
+        } else {
+          console.log("Conexão encerrada com sucesso.");
+        }
+      });
+});
+
+Neste contexto, observe que:
+
+- mysql.createConnection(): Cria uma nova instância de conexão com as credenciais fornecidas.
+
+- connection.connect(): Tenta estabelecer a conexão com o banco de dados e retorna um erro caso a conexão falhe.
+
+Caso você já tenha executado o servidor usando o Nodemon, veja abaixo a mensagem no console do Node.js caso a conexão com o banco de dados for bem-sucedida:
+
+Conectado ao banco de dados MySQL com sucesso!
+Conexão encerrada com sucesso.
+
