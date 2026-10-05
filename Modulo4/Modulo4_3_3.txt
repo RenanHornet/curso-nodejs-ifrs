@@ -1,0 +1,16 @@
+=== Introdução ao Mongoose ===
+Mongoose é uma biblioteca de ODM (Object Data Modeling) para Node.js, que fornece uma solução robusta para modelar e gerenciar dados em aplicações que usam o MongoDB. Ele simplifica a interação com o banco de dados MongoDB, permitindo que os desenvolvedores definam esquemas de dados, gerenciem validações, criem métodos de instância e métodos estáticos e apliquem middlewares em suas aplicações.
+
+Veja alguns motivos para usar o Mongoose:
+- Abstração e Simplicidade: O Mongoose abstrai as complexidades do MongoDB nativo, facilitando a manipulação de dados e operações de banco de dados.
+
+- Definição de Esquema: Oferece a capacidade de definir esquemas para documentos, o que ajuda a manter a consistência dos dados.
+
+- Validação de Dados: Permite adicionar regras de validação de dados diretamente nos esquemas.
+
+- Middlewares: Suporta middlewares pré e pós-processamento, permitindo executar ações antes ou depois de operações específicas, como save ou find.
+
+- Métodos Personalizados: Permite criar métodos de instância e métodos estáticos para encapsular a lógica relacionada aos dados.
+
+- Population: Oferece uma forma de fazer referências entre documentos e realizar consultas análogas às joins em bancos de dados relacionais.
+

@@ -1,0 +1,84 @@
+=== introdução ao MongoDB ===
+O MongoDB é um banco de dados NoSQL orientado a documentos, projetado para ser simples, dinâmico e escallável. Em vez de armazenar dados em linhas e colunas de uma tabela, como em banco de dados relacionais, o MongoDB armazena os dados em documentos JSON ou BSON dentro de coleções. Essa abordagem poermite que os dados tenham uma estrutura mais flexível e adaptável às mudanças, sendo ideal para aplicações que exigem escalabilidade e alta performance. Uma de suas principais motivações é fornecer um armazenamento de dados de alto desempenho, com alta disponibilidade e escalabilidade automática. O MongoDB é compatível com sistemas operacionais com Windows, Linux, Mac OS x e Solaris.
+
+=-=-= O que é um banco de ados NoSQL? =-=-=
+O termo NoSQL surgiu em 2009 durante uma reunião em São Francisco, EUA, organizada por Johan Oskarsson. Essa reunião discutiu banco de dados de código aberto, não relacionais, sem exquema fixo e distribuídos. NoSQL significa "Not Only SQL", ou seja, "não apenas SQL", destacando que esses bancos de dados não são limitados á estrutura relacional tradicional. 
+
+Veja as principais categorias de banco de dados NoSQL:
+- Document-oriented: Cada registro é armazenado como um documento JSON, permitindo que os documentos em uma coleção tenham diferentes estruturas.
+
+- Schema-less: A estrutura dos documentos não é rigidamente definida, permitindo mais flexibilidade.
+
+- Alta escalabilidade: Suporta particionamento horizontal (sharding) para distribuir dados em vários servidores.
+
+- Consultas ricas: Oferece uma API robusta para consultas, filtragem e agregação de dados.
+
+=-=-= Bancos de dados NoSQL não têm esquema fixo =-=-=
+Enquanto bancos de dados relacionais exigem que os esquemas sejam definidos antecipadamente, os bancos de dados NoSQL permitem a inclusão de dados sem um esquema predefinido. Essa característica oferece maior flexibilidade, permitindo que alterações sejam feitas em tempo real sem a necessidade de parar ou modificar a estrutura de tabelas. Isso acelera o desenvolvimento, especialmente em aplicações que evoluem rapidamente e exigem ajustes frequentes.
+
+=-=-= Propriedade BASE =-=-=
+As transações em bancos de dados relacionais geralmente seguem as propriedades ACID (Atomicidade, Consistência, Isolamento e Durabilidade), garantindo integridade e segurança, mas com custo de desempenho e complexidade. Em contrapartida, os bancos de dados NoSQL operam sob as propriedades BASE (Basic Availability, Soft-state, Eventual consistency):
+
+- Basic Availability: O banco de dados está disponível na maior parte do tempo.
+- Soft-state: O estado dos dados pode mudar sem uma gravação explícita.
+- Eventual consistency: Os dados serão consistentes em algum momento, mesmo que não imediatamente.
+
+As propriedades BASE oferecem flexibilidade e desempenho superiores, especialmente em aplicações que exigem alta disponibilidade e são distribuídas.
+
+=-=-= Quando o NoSQL é indicado? =-=-=
+Bancos de dados NoSQL são ideais para cenários que exigem manipulação de grandes volumes de dados e consultas em tempo real. Em bancos de dados relacionais, quanto maior a base de dados, maior tende a ser o tempo de resposta, o que pode ser inviável em ambientes que necessitam de respostas instantâneas. NoSQL é recomendado para aplicações que precisam de alta performance, escalabilidade horizontal (diversos servidores) e adaptação rápida a novas demandas. Empresas de grande porte e projetos com grandes quantidades de dados frequentemente adotam bancos NoSQL por sua facilidade de escalabilidade e alta performance.
+
+=-=-= MongoDB não usa SQL =-=-=
+Ao contrário dos bancos de dados relacionais, que utilizam a SQL (Structured Query Language) para consultas, o MongoDB utiliza documentos JSON ou BSON para armazenar dados. O BSON é uma versão binária do JSON, desenvolvida para melhorar o armazenamento e a indexação dos dados.
+
+Veja abaixo como funciona a estrutura de armazenamento do MongoDB:
+- Uma instância do MongoDB pode conter vários bancos de dados.
+- Cada banco de dados possui múltiplas coleções.
+- Cada coleção armazena documentos JSON/BSON, que podem ter diferentes estruturas.
+
+A seguir está um quadro comparativo entre as nomenclaturas usadas em bancos de dados relacionais e NoSQL:
+
+--- Banco de dados relacionais ---
+    - Tabela: Conjunto de registros/dados. Em NoSQL, uma coleção armazena documentos JSON/BSON.
+
+    - Linha: Um único registro dentro de uma tabela/coleção. Em MongoDB, cada documento pode ter uma estrutura diferente.
+
+    - Coluna: Representa um atributo/valor de um registro. Em MongoDB, os campos podem variar de documento para documento.
+
+    - Chave Primária: Identificador único de um registro/documento. Em MongoDB, o campo _id é gerado automaticamente.
+
+    - Banco de dados: Agrupamento de tabelas em SQL e de coleções em MongDB.
+
+--- Banco de dados NoSQL (MongDB) ---
+    - Coleção: Conjunto de registros/dados. Em NoSQL, uma coleção armazena documentos JSON/BSON.
+
+    - Documento: Um único registro dentro de uma tabela/coleção. Em MongoDB, cada documento pode ter uma estrutura diferente.
+
+    - Campo: Representa um atributo/valor de um registro. Em MongoDB, os campos podem variar de documento para documento.
+
+    - _id: Identificador único de um registro/documento. Em MongoDB, o campo _id é gerado automaticamente.
+
+    - Banco de dados: Agrupamento de tabelas em SQL e de coleções em MongDB.
+
+=-=-= Instalação e configuração do MongoDB =-=-=
+O MongoDB é um banco de dados NoSQL popular e fácil de usar, amplamente adotado em projetos que requerem armazenamento flexível e escalabilidade. A instalação e configuração do MongoDB podem variar dependendo do sistema operacional. Assim, acesse o site oficial do MongoDB e baixe a versão do MongoDB Community Server compatível com o seu sistema operacional.
+
+Existem várias opções de clientes de banco de dados que podem ser usados para gerenciar bancos de dados MongoDB. Estes facilitam a interação com o banco de dados, tanto para desenvolvedores quanto para administradores. Aqui estão alguns das principais aplicações clientes de banco de dados para MongoDB:
+
+- MongoDB Compass: É a ferramenta oficial desenvolvida pela própria equipe do MongoDB. Ele oferece uma série de recursos que tornam mais fácil explorar e manipular dados, criar consultas, visualizar a estrutura do banco de dados e obter insights sobre o desempenho.
+
+- Robo 3T: Um cliente de banco de dados leve e gratuito para MongoDB que oferece uma interface intuitiva e suporte para JavaScript.
+
+- Studio 3T: Uma ferramenta avançada e rica em recursos para desenvolvedores e administradores que trabalham com MongoDB.
+
+- NoSQLBooster for MongoDB: Um cliente de banco de dados para o MongoDB que oferece suporte completo a consultas com JavaScript e recursos avançados para desenvolvedores.
+
+- MongoDB Shell: O shell oficial do MongoDB, ideal para quem prefere trabalhar em uma interface de linha de comando.
+
+DBeaver: Um cliente de banco de dados universal que suporta MongoDB e muitos outros bancos de dados SQL e NoSQL.
+
+Outra opção seria utilizar um plugin do Visual Studio Code (VSCode) para interagir com bancos de dados diretamente da IDE. Segue abaixo alguns exemplos deste plugins:
+
+MongoDB for VS Code: Este é o plugin oficial do MongoDB para o VSCode. Ele permite que desenvolvedores se conectem ao MongoDB, explorem bancos de dados e coleções, e executem consultas diretamente do editor.
+
+Mongo Playground: oferece um ambiente de simulação onde você pode escrever e executar comandos sem precisar de sua instalação local do MongoDB.

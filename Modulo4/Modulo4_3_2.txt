@@ -1,0 +1,29 @@
+=== Criando a base de dados ===
+Nesta aula, vamos criar um database chamado exemplo_nosql. Para isso, vamos utilizar uma ferramenta de gerenciamento de banco de dados NoSQL, neste caso, o MongoDB for VS Code. Após a instalação deste plugin, você verá um ícone do MongoDB (em formato de folha) na barra lateral esquerda do VS Code. Clique nesse ícone para abrir o Explorador de Dados do MongoDB.
+
+Nesta tela, clique em “Connect” para iniciar o processo de criação de uma nova conexão. Será exibida uma janela solicitando a URI de conexão. Essa URI especifica os detalhes do servidor MongoDB ao qual você deseja se conectar.
+
+Veja abaixo um exemplo de uma URI de conexão para uma instância local:
+
+mongodb://localhost:27017
+
+Veja abaixo um exemplo de uma URI de conexão com autenticação:
+
+mongodb://username:password@localhost:27017
+
+Desta forma, insira a URI de conexão conforme sua instalação do MongoDB e clique em “Connect”. Após clicar em “Connect”, o plugin tentará se conectar ao MongoDB. Se a conexão for bem-sucedida, você verá uma lista de bancos de dados no explorador de dados do MongoDB.
+
+Nesta mesma tela de explorador de dados do MongoDB, clique com o botão direito em localhost e selecione “Add Database”. Na tela que irá aparecer, adicione as seguintes informações:
+
+const database = 'exemplo_nosql';
+const collection = usuario;
+
+// Create a new database.
+use(database);
+    
+// Create a new collection.
+db.createCollection(collection);
+
+Em seguida, clique no ícone “Run All” ou selecione o código e clique em “Run Selection”.
+
+Veja novamente na tela do explorador de dados do MongoDB que a base de dados exemplo_nosql foi criada com uma coleção chamada usuario.
