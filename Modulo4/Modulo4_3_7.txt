@@ -1,0 +1,117 @@
+=== Testando as rotas do Servidor HTTP ===
+
+Neste curso, utilizamos a extensão REST Client do VS Code para testar os endpoints da aplicação. Neste contexto, crie uma pasta nome “request” em seu projeto .Em seguida, dentro desta pasta, crie um arquivo com o nome de sua preferência com a extensão “.rest”, por exemplo, testes.rest. Veja como ficou o arquivo testes.rest:
+
+@baseURL = http://localhost:3000
+@id_do_usuario = algum_id
+
+### 1. Criar um novo usuário (POST)
+POST {{baseURL}}/usuarios
+Content-Type: application/json
+    
+{
+      "nome": "Carlos",
+      "idade": 28,
+      "email": "carlos@exemplo.com"
+}
+    
+### 2. Obter todos os usuários (GET)
+GET {{baseURL}}/usuarios
+Content-Type: application/json
+    
+### 3. Atualizar um usuário existente (PUT)
+PUT {{baseURL}}/usuarios/{{id_do_usuario}}
+Content-Type: application/json
+    
+{
+      "nome": "Carlos Silva",
+      "idade": 30,
+      "email": "carlos.silva@exemplo.com"
+}
+    
+### 4. Deletar um usuário (DELETE)
+DELETE {{baseURL}}/usuarios/{{id_do_usuario}}
+Content-Type: application/json
+
+Após escrever cada requisição, um link “Send Request” aparecerá acima delas. Clique nesse link para enviar cada requisição. Neste contexto, ao testarmos a rota “Criar um novo usuário (POST)”, teremos o seguinte resultado esperado:
+
+HTTP/1.1 201 Created
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 98
+ETag: W/"62-FJmPI3LEUOLnaBOdpEkUzLKUNNU"
+Date: Wed, 06 Nov 2024 19:07:45 GMT
+Connection: close
+
+{
+      "nome": "Carlos",
+      "idade": 28,
+      "email": "carlos@exemplo.com",
+      "_id": "672bbe817653a38c1b335511",
+      "__v": 0
+}
+    
+
+
+Em seguida, ao testarmos a rota “Obter todos os usuários (GET)”, teremos o seguinte resultado:
+
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 100
+ETag: W/"64-wGHUiI3lNImROZytxNJNRLG71gw"
+Date: Wed, 06 Nov 2024 19:08:27 GMT
+Connection: close
+    
+ [
+      {
+    
+        "_id": "672bbe817653a38c1b335511",
+        "nome": "Carlos",
+        "idade": 28,
+        "email": "carlos@exemplo.com",
+        "__v": 0
+      }
+ ]
+    
+
+
+Depois, vamos testarmos a rota “Atualizar um usuário existente (PUT)”. Para isso, preciso informar o @id_do_usuario o valor do _id do meu usuário (neste caso, 672bbe817653a38c1b335511).
+
+Veja o resultado esperado:
+
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 110
+ETag: W/"6e-28DpS1otWH6K7JX/NCSwJgaQaDo"
+Date: Wed, 06 Nov 2024 19:13:17 GMT
+Connection: close
+    
+ {
+    
+      "_id": "672bbe817653a38c1b335511",
+      "nome": "Carlos Silva",
+      "idade": 30,
+      "email": "carlos.silva@exemplo.com",
+      "__v": 0
+ }
+    
+
+
+E, finalmente, ao testarmos a rota “Deletar um usuário (DELETE)”. Para isso, preciso informar o @id_do_usuario o valor do _id do meu usuário (neste caso, 672bbe817653a38c1b335511).
+
+Veja o resultado esperado:
+
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 43
+ETag: W/"2b-nhSv4q4D4tc6ExOi88H/Trmj4Pw"
+Date: Wed, 06 Nov 2024 19:14:27 GMT
+Connection: close
+    
+{
+    
+      "message": "Usuário deletado com sucesso"
+}

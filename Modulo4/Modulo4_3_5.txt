@@ -1,0 +1,23 @@
+Para que uma aplicação Node.js se conecte a bancos de dados NoSQL, é necessário instalar pacotes específicos que façam a ponte entre o Node.js e o banco de dados escolhido. A biblioteca mongoose é uma das mais populares para conectar aplicações Node.js ao bancos de dados MongoDB.
+
+Antes de iniciar a configuração, é necessário instalar o pacote mongoose no projeto. Use o seguinte comando para instalá-lo:
+
+npm i mongoose
+
+A seguir, vamos configurar a conexão com o banco de dados. Vamos criar um arquivo chamado server.js. Neste arquivo, primeiro, importe a biblioteca e configure a conexão fornecendo as credenciais necessárias, como host, usuário, senha e nome do banco de dados.
+
+const mongoose = require("mongoose");
+
+// Função assíncrona para conectar ao MongoDB
+const conectarMongoDB = async () => {
+      try {
+        await mongoose.connect("mongodb://localhost:27017/exemplo_db");
+        console.log("Conectado ao MongoDB com sucesso!");
+      } catch (err) {
+        console.error("Erro ao conectar ao MongoDB:", err);
+        process.exit(1); // Encerra o processo em caso de falha
+      }
+};
+    
+// Inicia a conexão
+conectarMongoDB();

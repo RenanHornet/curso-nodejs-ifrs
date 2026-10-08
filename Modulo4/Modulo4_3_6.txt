@@ -1,0 +1,146 @@
+Para auxiliar no entendimento dos conteúdos desta aula, vamos organizar o projeto em arquivos diferentes para melhorar a modularidade, a manutenção e a escalabilidade do código. A seguir, uma estrutura de projeto mais organizada dividida em vários arquivos:
+
+node-nosql/
+    config/
+        db.js
+    models/
+        usuario.js
+    routes/
+        usuarioRoutes.js
+    controllers/
+        usuarioController.js
+    package.json
+    server.js
+
+=-=-= Configurando a conexão com o Banco de Dados =-=-=
+O arquivo config/db.js será responsável por configurar e exportar a conexão com o banco de dados. Veja seu código abaixo:
+
+const mongoose = require("mongoose");
+const connectDB = async () => {
+        try {
+          await mongoose.connect("mongodb://localhost:27017/exemplo_nosql");
+          console.log("Conectado ao MongoDB com sucesso!");
+        } catch (error) {
+          console.error("Erro ao conectar ao MongoDB:", error);
+          process.exit(1); // Finaliza a aplicação em caso de falha na conexão
+        }
+};
+module.exports = connectDB;
+
+=-=-= Definição do Modelo =-=-=
+O arquivo models/Usuario.js define o esquema do Mongoose para a coleção usuario. Veja seu código abaixo:
+
+const mongoose = require("mongoose");
+
+const usuarioSchema = new mongoose.Schema({
+        nome: {
+          type: String,
+          required: true,
+          trim: true,
+        },
+        idade: {
+          type: Number,
+          required: true,
+          min: 0,
+        },
+        email: {
+          type: String,
+          required: true,
+          unique: true,
+          match: /.+\@.+\..+/,
+        },
+ });
+      
+ module.exports = mongoose.model("Usuario", usuarioSchema);
+
+ =-=-= Controladores =-=-=
+ O arquivo controllers/usuarioController.js contém as funções assíncronas para lidar com as operações CRUD. Veja seu código abaixo:
+
+ const Usuario = require("../models/Usuario");
+
+// Criar um novo usuário
+exports.criarUsuario = async (req, res) => {
+      try {
+        const usuario = new Usuario(req.body);
+        await usuario.save();
+        res.status(201).json(usuario);
+      } catch (error) {
+        res.status(400).json({ message: "Erro ao criar usuário", error });
+      }
+};
+// Obter todos os usuários
+exports.obterUsuarios = async (req, res) => {
+      try {
+        const usuarios = await Usuario.find();
+        res.status(200).json(usuarios);
+      } catch (error) {
+        res.status(500).json({ message: "Erro ao buscar usuários", error });
+      }
+};
+// Atualizar um usuário
+exports.atualizarUsuario = async (req, res) => {
+      try {
+        const { id } = req.params;
+        const usuarioAtualizado = await Usuario.findByIdAndUpdate(id, req.body, {
+          new: true,
+        });
+        if (!usuarioAtualizado) {
+          return res.status(404).json({ message: "Usuário não encontrado" });
+        }
+        res.status(200).json(usuarioAtualizado);
+      } catch (error) {
+        res.status(400).json({ message: "Erro ao atualizar usuário", error });
+      }
+};
+    
+// Deletar um usuário
+exports.deletarUsuario = async (req, res) => {
+      try {
+        const { id } = req.params;
+        const usuarioDeletado = await Usuario.findByIdAndDelete(id);
+        if (!usuarioDeletado) {
+          return res.status(404).json({ message: "Usuário não encontrado" });
+        }
+        res.status(200).json({ message: "Usuário deletado com sucesso" });
+      } catch (error) {
+        res.status(500).json({ message: "Erro ao deletar usuário", error });
+      }
+};
+    
+=-=-= Rotas =-=-=
+O arquivo routes/usuarioRoutes.js define as rotas para as operações CRUD. Veja seu código no quadro abaixo:
+
+const express = require('express');
+const router = express.Router();
+const usuarioController = require('../controllers/usuarioController');
+    
+router.post('/', usuarioController.criarUsuario);
+router.get('/', usuarioController.obterUsuarios);
+router.put('/:id', usuarioController.atualizarUsuario);
+router.delete('/:id', usuarioController.deletarUsuario);
+    
+module.exports = router;
+
+=-=-= Configurações do servidor =-=-=
+O arquivo server.js é o ponto de entrada da aplicação. Veja seu código no quadro abaixo:
+
+const express = require("express");
+const connectDB = require("./config/db");
+const usuarioRoutes = require("./routes/usuarioRoutes");
+const app = express();
+const PORT = 3000;
+    
+// Conectar ao MongoDB
+connectDB();
+    
+// Middleware para interpretação de JSON
+app.use(express.json());
+    
+// Rotas
+app.use("/usuarios", usuarioRoutes);
+    
+// Iniciar o servidor
+app.listen(PORT, () => {
+      console.log(`Servidor rodando em http://localhost:${PORT}`);
+});
+    
